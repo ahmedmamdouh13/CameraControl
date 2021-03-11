@@ -43,15 +43,6 @@ pipeline {
     }
 
 stages {
- stage('Run Tests') {
-            steps {
-                echo 'Running Tests'
-                script {
-                    VARIANT = getBuildType()
-                    sh "./gradlew test${VARIANT}UnitTest"
-                }
-            }
-        }
 
         stage('Build Bundle') {
             when { expression { return isDeployCandidate() } }
@@ -60,6 +51,15 @@ stages {
                 script {
                     VARIANT = getBuildType()
                     sh "./gradlew -PstorePass=${STORE_PASSWORD} -Pkeystore=${KEYSTORE} -Palias=${KEY_ALIAS} -PkeyPass=${KEY_PASSWORD} bundle${VARIANT}"
+                }
+            }
+        }
+ stage('Run Tests') {
+            steps {
+                echo 'Running Tests'
+                script {
+                    VARIANT = getBuildType()
+                    sh "./gradlew test${VARIANT}UnitTest"
                 }
             }
         }
