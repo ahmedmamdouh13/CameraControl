@@ -2,8 +2,8 @@ FROM adoptopenjdk/openjdk8:alpine
 
 ENV SDK_TOOLS "4333796"
 ENV ANDROID_HOME "/opt/sdk"
-ENV ANDROID_NDK_HOME "/opt/sdk/ndk-bundle"
-ENV ANDROID_NDK_VERSION r22
+ENV ANDROID_NDK_HOME "/opt/android-ndk"
+ENV ANDROID_NDK_VERSION r21e
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 # Install required dependencies
