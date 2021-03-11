@@ -3,6 +3,14 @@ plugins {
     id 'kotlin-android'
 }
 
+
+static def computeVersionCode(){
+    return Integer.valueOf(System.env.BUILD_NUMBER ?: 1)
+}
+
+static def computeVersionName(){
+    return String.valueOf(System.env.BUILD_NUMBER ?: 1)
+}
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -11,8 +19,8 @@ android {
         applicationId "com.ahmedmamdouh13"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode computeVersionCode()
+        versionName computeVersionName()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -26,12 +34,23 @@ android {
         }
     }
 
+
+    signingConfigs {
+        config {
+            keyAlias alias
+            keyPassword keyPass
+            storeFile file(keystore)
+            storePassword storePass
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }
 
     buildTypes {
         release {
+            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
