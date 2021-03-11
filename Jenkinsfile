@@ -54,11 +54,7 @@ stages {
                 }
             }
 
-            post {
-                   always {
-                           jiraSendBuildInfo site: 'ahmedmamdouh13.atlassian.net'
-                          }
-                  }
+
         }
  stage('Run Tests') {
             steps {
@@ -68,6 +64,11 @@ stages {
                     sh "./gradlew test${VARIANT}UnitTest"
                 }
             }
+                        post {
+                               always {
+                                       jiraSendBuildInfo site: 'ahmedmamdouh13.atlassian.net'
+                                      }
+                              }
         }
         stage('Deploy App to Store') {
             when { expression { return isDeployCandidate() } }
