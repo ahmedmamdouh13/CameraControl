@@ -51,6 +51,7 @@ RUN sdkmanager $SDK_PACKAGES
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
+RUN echo "ndk.dir=$ANDROID_NDK_HOME/android-ndk-${ANDROID_NDK_VERSION}" > local.properties
 
 # Common Gradle settings, customise as you see fit
 ENV GRADLE_OPTS "-Xmx1600m -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.caching=true"
