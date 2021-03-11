@@ -44,6 +44,7 @@ RUN chmod -R 777 "$ANDROID_NDK_HOME"
 # Platforms we need (defaults)
 ARG SDK_PACKAGES="build-tools;30.0.2 platforms;android-30"
 RUN sdkmanager $SDK_PACKAGES
+RUN sdkmanager --install "ndk;21.4.7075529"
 
 
 
@@ -51,7 +52,6 @@ RUN sdkmanager $SDK_PACKAGES
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
-RUN echo "ndk.dir=$ANDROID_NDK_HOME/android-ndk-${ANDROID_NDK_VERSION}" > local.properties
 
 # Common Gradle settings, customise as you see fit
 ENV GRADLE_OPTS "-Xmx1600m -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.caching=true"
