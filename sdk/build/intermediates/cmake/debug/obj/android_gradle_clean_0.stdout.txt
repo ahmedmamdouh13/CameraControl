@@ -1,1 +1,0 @@
-ninja: Entering directory `/home/ahmedmamdouh13/Desktop/CameraControl/opencv/.cxx/cmake/debug/armeabi-v7a'

@@ -26,6 +26,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -34,7 +38,7 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path "../CMakeLists.txt"
+            path "/home/ahmedmamdouh13/Desktop/CameraControl/CMakeLists.txt"
             version "3.10.2"
         }
     }

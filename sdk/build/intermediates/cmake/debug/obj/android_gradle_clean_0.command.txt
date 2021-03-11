@@ -1,7 +1,0 @@
-Executable : /home/ahmedmamdouh13/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
-arguments : 
--C
-/home/ahmedmamdouh13/Desktop/CameraControl/opencv/.cxx/cmake/debug/armeabi-v7a
-clean
-jvmArgs : 
-

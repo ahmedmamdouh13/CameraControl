@@ -3,7 +3,7 @@
 
 # Sets the minimum version of CMake required to build the native library.
 
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.4.1)
 
 # Declares and names the project.
 
@@ -18,6 +18,5 @@ find_package(OpenCV REQUIRED COMPONENTS ${ANDROID_OPENCV_COMPONENTS})
 file(GLOB srcs *.cpp *.c)
 file(GLOB hdrs *.hpp *.h)
 
-include_directories("app/src/main/cpp")
-add_library(${target} SHARED /home/ahmedmamdouh13/Desktop/CameraControl/app/src/main/cpp/native-lib.cpp ${hdrs})
+add_library(${target} SHARED /home/ahmedmamdouh13/Desktop/CameraControl/app/cpp/native-lib.cpp ${hdrs})
 target_link_libraries(${target} ${ANDROID_OPENCV_COMPONENTS})
