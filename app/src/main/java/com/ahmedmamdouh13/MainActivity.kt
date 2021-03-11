@@ -3,14 +3,14 @@ package com.ahmedmamdouh13
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import com.ahmedmamdouh13.databinding.ActivityMainBinding
-import org.opencv.android.BaseLoaderCallback
-import org.opencv.android.CameraActivity
-import org.opencv.android.LoaderCallbackInterface
-import org.opencv.android.OpenCVLoader
+import org.opencv.android.*
+import org.opencv.core.Mat
+import java.util.*
 
-class MainActivity : CameraActivity() {
+class MainActivity : CameraActivity(),CameraBridgeViewBase.CvCameraViewListener2  {
 
 
     private lateinit var binder: ActivityMainBinding
@@ -20,17 +20,21 @@ class MainActivity : CameraActivity() {
         super.onCreate(savedInstanceState)
         binder = ActivityMainBinding.inflate(LayoutInflater.from(this));
         setContentView(binder.root)
+        binder.cameraview.visibility = View.VISIBLE
+
+        binder.cameraview.setCvCameraViewListener(this)
 
     }
 
     override fun onResume() {
         super.onResume()
 
-        if (!OpenCVLoader.initDebug()) {
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, baseLoaderCallback)
-        } else {
-            baseLoaderCallback.onManagerConnected(BaseLoaderCallback.SUCCESS)
-        }
+//        if (!OpenCVLoader.initDebug()) {
+//            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, baseLoaderCallback)
+//        } else {
+            baseLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS)
+
+//        }
     }
 
     external fun drawFeatures(matRGB: Long, matGray: Long): String
@@ -49,11 +53,29 @@ class MainActivity : CameraActivity() {
             super.onManagerConnected(status)
 
             if (status == SUCCESS) {
-
-            } else {
+                System.loadLibrary("opencv_java4")
+                binder.cameraview.enableView()
 
             }
 
         }
     }
+
+    override fun getCameraViewList(): MutableList<out CameraBridgeViewBase> {
+        return Collections.singletonList(binder.cameraview)
+    }
+
+    override fun onCameraViewStarted(width: Int, height: Int) {
+
+    }
+
+    override fun onCameraViewStopped() {
+    }
+
+    override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame): Mat {
+        val rgba = inputFrame.rgba()
+
+        return rgba
+    }
+
 }

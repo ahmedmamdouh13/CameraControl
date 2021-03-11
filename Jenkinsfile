@@ -53,6 +53,12 @@ stages {
                     sh "./gradlew -PstorePass=${STORE_PASSWORD} -Pkeystore=${KEYSTORE} -Palias=${KEY_ALIAS} -PkeyPass=${KEY_PASSWORD} bundle${VARIANT}"
                 }
             }
+
+            post {
+                   always {
+                           jiraSendBuildInfo site: 'ahmedmamdouh13.atlassian.net'
+                          }
+                  }
         }
  stage('Run Tests') {
             steps {
