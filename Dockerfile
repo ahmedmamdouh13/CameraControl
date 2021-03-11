@@ -3,6 +3,7 @@ FROM adoptopenjdk/openjdk8:alpine
 ENV SDK_TOOLS "4333796"
 ENV ANDROID_HOME "/opt/sdk"
 ENV ANDROID_NDK_HOME "/opt/sdk/ndk-bundle"
+ENV ANDROID_NDK_VERSION r22
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 # Install required dependencies
@@ -23,6 +24,20 @@ RUN mkdir -p ~/.android/ && touch ~/.android/repositories.cfg && \
     ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" && \
     ${ANDROID_HOME}/tools/bin/sdkmanager "--update"
 
+
+# download
+RUN mkdir /opt/android-ndk-tmp && \
+    cd /opt/android-ndk-tmp && \
+    wget -q https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_VERSION}-linux-x86_64.zip && \
+# uncompress
+    unzip -q android-ndk-${ANDROID_NDK_VERSION}-linux-x86_64.zip && \
+# move to its final location
+    mv ./android-ndk-${ANDROID_NDK_VERSION} ${ANDROID_NDK_HOME} && \
+# remove temp dir
+    cd ${ANDROID_NDK_HOME} && \
+    rm -rf /opt/android-ndk-tmp
+
+
 WORKDIR /home/android
 RUN chmod -R 777 "$ANDROID_HOME"
 RUN chmod -R 777 "$ANDROID_NDK_HOME"
@@ -30,8 +45,6 @@ RUN chmod -R 777 "$ANDROID_NDK_HOME"
 ARG SDK_PACKAGES="build-tools;30.0.2 platforms;android-30"
 RUN sdkmanager $SDK_PACKAGES
 
-RUN sdkmanager --install "ndk;20.0.5594570" --channel=0 // Install the NDK from the canary channel (or below)
-RUN sdkmanager --install "cmake;10.24988404" // Install a specific version of CMake
 
 
 # User for our build, depends on your system
