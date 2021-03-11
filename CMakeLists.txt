@@ -18,5 +18,5 @@ find_package(OpenCV REQUIRED COMPONENTS ${ANDROID_OPENCV_COMPONENTS})
 file(GLOB srcs *.cpp *.c)
 file(GLOB hdrs *.hpp *.h)
 
-add_library(${target} SHARED /home/ahmedmamdouh13/Desktop/CameraControl/app/cpp/native-lib.cpp ${hdrs})
+add_library(${target} SHARED /app/cpp/native-lib.cpp ${hdrs})
 target_link_libraries(${target} ${ANDROID_OPENCV_COMPONENTS})
