@@ -67,19 +67,15 @@ stages {
                 script {
                    sh "$ANDROID_HOME/emulator/emulator -avd pixel -wipe-data"
 
-                        # Wait for Android to finish booting
                     sh  "WAIT_CMD="$ANDROID_HOME/platform-tools/adb wait-for-device shell getprop init.svc.bootanim" until $WAIT_CMD | grep -m 1 stopped; do"
                           echo 'Waiting...'
                      sh     "sleep 1"
 
-                        # Unlock the Lock Screen
                       sh "$ANDROID_HOME/platform-tools/adb shell input keyevent 82"
 
-                        # Clear and capture logcat
                       sh "$ANDROID_HOME/platform-tools/adb logcat -c"
                      sh "$ANDROID_HOME/platform-tools/adb logcat > build/logcat.log"
 
-                        # Run the tests
                       sh "./gradlew connectedAndroidTest -i"
 
                 }
