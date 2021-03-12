@@ -44,7 +44,9 @@ RUN chmod -R 777 "$ANDROID_NDK_HOME"
 # Platforms we need (defaults)
 ARG SDK_PACKAGES="build-tools;30.0.2 platforms;android-30"
 RUN sdkmanager $SDK_PACKAGES
-RUN sdkmanager --install "ndk;21.4.7075529"
+RUN sdkmanager --install "ndk;21.4.7075529"  && \
+    yes | sdkmanager --licenses
+
 
 
 
