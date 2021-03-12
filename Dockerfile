@@ -70,6 +70,8 @@ USER jenkins
 
 # Add instructions for android emulator
 
+RUN echo Y | apt install cpu-checker && \
+    echo Y | apt-get install qemu-kvm
 
 
 
