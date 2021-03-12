@@ -56,7 +56,7 @@ RUN sdkmanager "system-images;android-30;google_apis;x86_64" && \
 
 
 ENV ANDROID_AVD_HOME="${ANDROID_HOME}/avd"
-ENV  mkdir -p ${ANDROID_AVD_HOME}
+RUN  mkdir -p ${ANDROID_AVD_HOME}
 RUN chmod -R 777 "$ANDROID_AVD_HOME"
 
 
