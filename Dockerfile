@@ -55,6 +55,9 @@ RUN sdkmanager "system-images;android-30;google_apis;x86_64" && \
     yes | sdkmanager --licenses
 
 
+ENV ANDROID_AVD_HOME="~/.android/avd"
+
+
 RUN echo "n" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-30;google_apis;x86_64"
 
 
@@ -62,7 +65,6 @@ RUN echo "n" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "syst
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
-ENV ANDROID_AVD_HOME="~/.android/avd"
 
 # Add instructions for android emulator
 
