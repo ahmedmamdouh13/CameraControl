@@ -10,7 +10,7 @@ import org.opencv.android.*
 import org.opencv.core.Mat
 import java.util.*
 
-class MainActivity : CameraActivity(),CameraBridgeViewBase.CvCameraViewListener2  {
+class MainActivity : CameraActivity(), CameraBridgeViewBase.CvCameraViewListener2 {
 
 
     private lateinit var binder: ActivityMainBinding
@@ -18,12 +18,23 @@ class MainActivity : CameraActivity(),CameraBridgeViewBase.CvCameraViewListener2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binder = ActivityMainBinding.inflate(LayoutInflater.from(this));
+        binder = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binder.root)
         binder.cameraview.visibility = View.VISIBLE
 
         binder.cameraview.setCvCameraViewListener(this)
 
+        setOnSwitchButtonClicked()
+    }
+
+    private var isGray = false
+
+    private fun setOnSwitchButtonClicked() {
+        binder.switchButton.setOnClickListener {
+            isGray = !isGray
+
+            binder.switchButton.text = if (isGray) "RGB" else "Gray"
+        }
     }
 
     override fun onResume() {
@@ -32,12 +43,11 @@ class MainActivity : CameraActivity(),CameraBridgeViewBase.CvCameraViewListener2
 //        if (!OpenCVLoader.initDebug()) {
 //            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, baseLoaderCallback)
 //        } else {
-            baseLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS)
+        baseLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS)
 
 //        }
     }
 
-    external fun drawFeatures(matRGB: Long, matGray: Long): String
 
     companion object {
         // Used to load the 'native-lib' library on application startup.
@@ -45,6 +55,8 @@ class MainActivity : CameraActivity(),CameraBridgeViewBase.CvCameraViewListener2
             System.loadLibrary("native-lib")
         }
     }
+
+    external fun drawFeatures(matRGB: Long, matGray: Long)
 
 
     val baseLoaderCallback = object : BaseLoaderCallback(this) {
@@ -73,7 +85,9 @@ class MainActivity : CameraActivity(),CameraBridgeViewBase.CvCameraViewListener2
     }
 
     override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame): Mat {
-        val rgba = inputFrame.rgba()
+        val rgba = if (!isGray) inputFrame.rgba() else inputFrame.gray()
+
+        drawFeatures(rgba.nativeObjAddr, inputFrame.gray().nativeObjAddr)
 
         return rgba
     }
