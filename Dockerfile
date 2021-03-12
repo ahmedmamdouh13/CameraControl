@@ -63,15 +63,15 @@ RUN chmod -R 777 "$ANDROID_AVD_HOME"
 RUN echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-30;google_apis;x86_64" -f -p $ANDROID_AVD_HOME
 
 
+# Add instructions for android emulator
+
+RUN echo Y | apk add cpu-checker && \
+    echo Y | apk add qemu-kvm
+
 # User for our build, depends on your system
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
-
-# Add instructions for android emulator
-
-RUN echo Y | apt-get install cpu-checker && \
-    echo Y | apt-get install qemu-kvm
 
 
 
