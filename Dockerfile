@@ -55,7 +55,7 @@ RUN sdkmanager "system-images;android-30;google_apis;x86_64" && \
     yes | sdkmanager --licenses
 
 
-RUN ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-26;google_apis;x86_64"
+RUN ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-30;google_apis;x86_64"
 
 
 # User for our build, depends on your system
