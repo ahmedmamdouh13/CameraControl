@@ -36,6 +36,10 @@ android {
     ndkVersion "21.4.7075529"
 
 
+    testOptions {
+        animationsDisabled = true
+    }
+
     signingConfigs {
         config {
             keyAlias alias

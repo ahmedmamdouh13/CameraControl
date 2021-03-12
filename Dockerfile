@@ -62,6 +62,7 @@ RUN echo "n" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "syst
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
+RUN ${ANDROID_HOME}/tools/emulator -avd Nexus_5X_API_29
 
 # Common Gradle settings, customise as you see fit
 ENV GRADLE_OPTS "-Xmx1600m -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.caching=true"

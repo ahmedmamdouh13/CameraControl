@@ -63,7 +63,13 @@ stages {
                     VARIANT = getBuildType()
                     sh "./gradlew test${VARIANT}UnitTest"
                 }
+                echo 'Running Instrumented Tests'
+                script {
+                    sh "./gradlew connectedCheck"
+                }
             }
+
+
                         post {
                                always {
                                        jiraSendBuildInfo site: 'ahmedmamdouh13.atlassian.net'
