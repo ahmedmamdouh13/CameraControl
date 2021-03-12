@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM adoptopenjdk/openjdk8:alpine
 
 ENV SDK_TOOLS "4333796"
 ENV ANDROID_HOME "/opt/sdk"
@@ -69,7 +69,7 @@ USER jenkins
 
 
 # Add instructions for android emulator
-
+RUN apk add qemu-system-x86_64 libvirt libvirt-daemon dbus polkit qemu-img
 
 
 
