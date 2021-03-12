@@ -3,7 +3,6 @@ FROM adoptopenjdk/openjdk8:alpine
 ENV SDK_TOOLS "4333796"
 ENV ANDROID_HOME "/opt/sdk"
 ENV ANDROID_NDK_HOME "/opt/android-ndk"
-ENV ANDROID_AVD_HOME="~/.android/avd"
 ENV ANDROID_NDK_VERSION r21e
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
@@ -63,6 +62,7 @@ RUN echo "n" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "syst
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
+ENV ANDROID_AVD_HOME="~/.android/avd"
 RUN ${ANDROID_HOME}/emulator/emulator -avd pixel
 
 # Common Gradle settings, customise as you see fit
