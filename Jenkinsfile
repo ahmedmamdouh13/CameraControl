@@ -65,7 +65,7 @@ stages {
                 }
                 echo 'Running Instrumented Tests'
                 script {
-                    sh "./gradlew connectedCheck"
+                    sh ${ANDROID_HOME}/androidTest
                 }
             }
 
