@@ -69,7 +69,7 @@ stages {
                 }
                 script {
 
-                    sh  "WAIT_CMD="$ANDROID_HOME/platform-tools/adb wait-for-device shell getprop init.svc.bootanim" until $WAIT_CMD | grep -m 1 stopped; do"
+                    sh  "WAIT_CMD=\"$ANDROID_HOME/platform-tools/adb wait-for-device shell getprop init.svc.bootanim\" until $WAIT_CMD | grep -m 1 stopped; do"
                           echo 'Waiting...'
                           }
                    script {
