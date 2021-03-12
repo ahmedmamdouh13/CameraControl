@@ -60,7 +60,7 @@ RUN  mkdir -p ${ANDROID_AVD_HOME}
 RUN chmod -R 777 "$ANDROID_AVD_HOME"
 
 
-RUN echo "n" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-30;google_apis;x86_64" -p "${ANDROID_AVD_HOME}"
+RUN echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-30;google_apis;x86_64" -p "${ANDROID_AVD_HOME}"
 
 
 # User for our build, depends on your system
