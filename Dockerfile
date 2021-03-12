@@ -66,12 +66,13 @@ RUN echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "sys
 # Add instructions for android emulator
 RUN apk add qemu-system-x86_64 libvirt libvirt-daemon dbus polkit qemu-img
 
+RUN adduser jenkins kvm
+RUN adduser jenkins qemu
 
 # User for our build, depends on your system
 RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
-RUN adduser jenkins kvm
-RUN adduser jenkins qemu
+
 
 
 
