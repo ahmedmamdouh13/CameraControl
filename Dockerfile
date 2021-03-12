@@ -56,6 +56,7 @@ RUN sdkmanager "system-images;android-30;google_apis;x86_64" && \
 
 
 ENV ANDROID_AVD_HOME="~/.android/avd"
+RUN chmod -R 777 "$ANDROID_AVD_HOME"
 
 
 RUN echo "n" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "system-images;android-30;google_apis;x86_64"
