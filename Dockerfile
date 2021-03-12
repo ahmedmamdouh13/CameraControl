@@ -51,7 +51,7 @@ RUN sdkmanager --install "ndk;21.4.7075529"  && \
 RUN sdkmanager emulator  && \
     yes | sdkmanager --licenses
 
-RUN sdkmanager "system-images;android-30;google_apis;x86_64"
+RUN sdkmanager "system-images;android-30;google_apis;x86_64" && \
     yes | sdkmanager --licenses
 
 
