@@ -65,7 +65,8 @@ RUN echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "sys
 
 # Add instructions for android emulator
 
-RUN echo Y | apk add cpu-checker && \
+RUN apk update && \
+    echo Y | apk add cpu-checker && \
     echo Y | apk add qemu-kvm
 
 # User for our build, depends on your system
