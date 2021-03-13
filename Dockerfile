@@ -8,7 +8,7 @@ ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platfor
 
 
 # User for our build, depends on your system
-USER jenkins
+USER root
 
 # Install required dependencies
 RUN apk add --no-cache bash git unzip wget && \
