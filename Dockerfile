@@ -67,7 +67,7 @@ RUN echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n pixel -k "sys
 RUN apk add qemu-system-x86_64 libvirt libvirt-daemon dbus polkit qemu-img
 
 RUN chmod -R 777 "/var"
-RUN chmod -R 777 "/"
+RUN chmod -R 777 "/opt"
 
 
 # User for our build, depends on your system
