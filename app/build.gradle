@@ -41,7 +41,13 @@ android {
     }
 
     signingConfigs {
-        config {
+        debug {
+            keyAlias alias
+            keyPassword keyPass
+            storeFile file(debugKeystore)
+            storePassword storePass
+        }
+        release {
             keyAlias alias
             keyPassword keyPass
             storeFile file(keystore)
@@ -55,7 +61,12 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
