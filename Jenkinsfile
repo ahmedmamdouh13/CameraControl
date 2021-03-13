@@ -66,7 +66,7 @@ stages {
                 }
                 echo 'Running Instrumented Tests'
                 script {
-                   sh "./gradlew -PstorePass=${STORE_PASSWORD} -Pkeystore=${DEBUG_KEYSTORE} -Palias=${KEY_ALIAS} -PkeyPass=${KEY_PASSWORD}  connectedAndroidTest -i"
+                   sh "./gradlew connectedCheck"
                 }
 
             }
