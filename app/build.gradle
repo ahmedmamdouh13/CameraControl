@@ -42,10 +42,10 @@ android {
 
     signingConfigs {
         debug {
-            keyAlias alias
-            keyPassword keyPass
-            storeFile file(debugKeystore)
-            storePassword storePass
+            keyAlias "alias_name"
+            keyPassword "248624862486"
+            storeFile file("../debug.keystore")
+            storePassword "248624862486"
         }
         release {
             keyAlias alias
