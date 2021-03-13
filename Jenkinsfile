@@ -65,7 +65,7 @@ stages {
                 }
                 echo 'Running Instrumented Tests'
                 script {
-                   sh "$ANDROID_HOME/emulator/emulator -avd pixel -no-audio -no-window"
+                   sh "$ANDROID_HOME/emulator/emulator -avd pixel -no-audio -no-window -no-accel"
                 }
                 script {
 
