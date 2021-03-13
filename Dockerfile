@@ -8,7 +8,6 @@ ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platfor
 
 
 # User for our build, depends on your system
-RUN adduser -u 1000 -h /home/android -D jenkins
 USER jenkins
 
 # Install required dependencies
