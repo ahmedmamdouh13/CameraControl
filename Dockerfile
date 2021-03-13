@@ -1,10 +1,15 @@
-FROM adoptopenjdk/openjdk8:alpine
+FROM jenkins/jenkins:alpine
 
 ENV SDK_TOOLS "4333796"
 ENV ANDROID_HOME "/opt/sdk"
 ENV ANDROID_NDK_HOME "/opt/android-ndk"
 ENV ANDROID_NDK_VERSION r21e
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+
+
+# User for our build, depends on your system
+RUN adduser -u 1000 -h /home/android -D jenkins
+USER jenkins
 
 # Install required dependencies
 RUN apk add --no-cache bash git unzip wget && \
@@ -68,11 +73,7 @@ RUN apk add qemu-system-x86_64 libvirt libvirt-daemon dbus polkit qemu-img
 
 
 
-# User for our build, depends on your system
-RUN adduser -u 1000 -h /home/android -D jenkins
-RUN adduser jenkins kvm
-RUN adduser jenkins qemu
-USER jenkins
+
 
 
 
