@@ -68,6 +68,7 @@ RUN apk add qemu-system-x86_64 libvirt libvirt-daemon dbus polkit qemu-img
 
 RUN chmod -R 777 "/var"
 RUN chmod  777 "/"
+RUN chmod  777 "//"
 
 
 # User for our build, depends on your system
