@@ -39,6 +39,7 @@ pipeline {
         KEY_PASSWORD = credentials('keyPass')
         KEY_ALIAS = credentials('alias')
         KEYSTORE = credentials('keystore')
+        DEBUG_KEYSTORE = credentials('debugKeystore')
         STORE_PASSWORD = credentials('storePass')
     }
 
@@ -65,7 +66,7 @@ stages {
                 }
                 echo 'Running Instrumented Tests'
                 script {
-                   sh "./gradlew -PstorePass=${STORE_PASSWORD} -Pkeystore=${KEYSTORE} -Palias=${KEY_ALIAS} -PkeyPass=${KEY_PASSWORD}  connectedAndroidTest -i"
+                   sh "./gradlew -PstorePass=${STORE_PASSWORD} -Pkeystore=${DEBUG_KEYSTORE} -Palias=${KEY_ALIAS} -PkeyPass=${KEY_PASSWORD}  connectedAndroidTest -i"
                 }
 
             }
