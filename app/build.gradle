@@ -41,12 +41,12 @@ android {
     }
 
     signingConfigs {
-        debug {
-            keyAlias "alias_name"
-            keyPassword "248624862486"
-            storeFile file("../debug.keystore")
-            storePassword "248624862486"
-        }
+//        debug {
+//            keyAlias "alias_name"
+//            keyPassword "248624862486"
+//            storeFile file("../debug.keystore")
+//            storePassword "248624862486"
+//        }
         release {
             keyAlias alias
             keyPassword keyPass
@@ -65,11 +65,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            signingConfig signingConfigs.debug
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+//        debug {
+//            signingConfig signingConfigs.debug
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
     }
     externalNativeBuild {
         cmake {
